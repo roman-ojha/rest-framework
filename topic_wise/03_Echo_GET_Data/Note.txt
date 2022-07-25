@@ -1,0 +1,1 @@
+*) Here we will learn about that we can get the data that is being requesting from the client like params, query
