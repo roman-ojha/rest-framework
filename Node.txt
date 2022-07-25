@@ -1,0 +1,6 @@
+*) Packages:
+    -> django
+    -> django-cors-headers
+    -> djangorestframework
+    -> pyyaml
+    -> requests
