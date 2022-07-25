@@ -1,2 +1,3 @@
 # here we will create our first python client
     -> create file called 'basic.py' inside 'py_client'
+    -> we will use requests package for http request
