@@ -1,0 +1,12 @@
+*) first we will create app:
+    -> python .\manage.py startapp api
+    -> INSTALLED_APPS = [
+        'api',
+        ]
+*) Create API endpoint view inside 'api/views.py'
+*) Create urls inside 'api/urls.py'
+    -> inside 'cfehome.py':
+    -> urlpatterns = [
+            path('api/', include('api.urls'))
+        ]
+*) Request API that we just create from 'py_client/basic.py'
