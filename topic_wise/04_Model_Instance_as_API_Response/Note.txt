@@ -1,0 +1,6 @@
+=> Now we will going to create a django model and respond on our api home view with the instance of that model
+*) Create app first:
+    -> python .\manage startapp products
+    -> INSTALLED_APPS = [
+        'products'
+        ]
