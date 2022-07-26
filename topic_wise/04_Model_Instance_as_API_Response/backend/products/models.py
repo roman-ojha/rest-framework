@@ -2,8 +2,6 @@ from importlib.resources import contents
 from turtle import title
 from django.db import models
 
-# Create your models here.
-
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
