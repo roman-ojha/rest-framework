@@ -1,0 +1,12 @@
+=> if we will go to url:
+    -> http://127.0.0.1:8000/api/
+    -> then we might will going to see 'TemplateDoesNotExist' that is because we have not followed the documentation for adding rest_framework so,
+    -> firstly we will add rest_framework as installed app in settings.py
+    ->  INSTALLED_APPS = [
+    'rest_framework',
+    ]
+
+=> after this we will create the views for "POST" method inside 'api/views.py' 
+=> after we will post request by sending data from client side we can serialize that data that is being send from the client side and validate that data
+
+NOTE: serializer & views are most critical thing in DRF
