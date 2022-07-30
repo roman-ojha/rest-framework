@@ -1,0 +1,1 @@
+=> Now here we will going to convert a 'api_home' from 'api/views.py' into a django rest framework view
