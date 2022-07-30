@@ -1,1 +1,1 @@
-=> Now we will convert a Django model 
+=> Now we will convert a Django model instance to dictionary inside 'api/views.py'
