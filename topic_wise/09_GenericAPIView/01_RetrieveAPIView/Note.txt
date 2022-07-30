@@ -1,4 +1,7 @@
 => https://www.django-rest-framework.org/api-guide/generic-views/#retrieveapiview
+*) retrieveApiView:
+    -> Used for read-only endpoints to represent a single model instance.
+    -> Provides a get method handler.
 
 => now here we will going to create view inside the 'product/views.py' and then we will add url for that view inside 'product/urls.py'
     -> then we will add that url inside the 'cfehome/urls.py'
