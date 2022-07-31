@@ -1,0 +1,2 @@
+=> now we will try to imitate the exact functionality that we created previously using generic view like "CreateAPIView", "ListAPIView", "RetrieveAPIView"
+=> after creating function view we change the urls.py views calling function

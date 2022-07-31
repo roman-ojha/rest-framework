@@ -3,9 +3,9 @@ from . import views
 
 urlpatterns = [
     # /api/products/1/
-    path('<int:pk>/', views.product_detail_view),
+    path('<int:pk>/', views.product_alt_view),
     # /api/products/
-    path('', views.product_create_view),
+    path('', views.product_alt_view),
     # /api/products/list
-    path('list/', views.product_list_create_view)
+    path('list/', views.product_alt_view)
 ]
