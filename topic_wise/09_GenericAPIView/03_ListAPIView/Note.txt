@@ -1,3 +1,7 @@
 *) ListAPIView:
     -> Used for read-only endpoints to represent a collection of model instances.
     -> Provides a get method handler.
+
+=> now again we will create the generic view class for ListAPIView inside 'products/views.py'
+
+=> after that we will create 'list.py' inside py_client

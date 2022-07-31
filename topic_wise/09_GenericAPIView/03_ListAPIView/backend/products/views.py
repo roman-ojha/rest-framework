@@ -6,23 +6,42 @@ from .serializers import ProductSerializer
 class ProductCreateAPIView(generics.CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # As we can see that both the 'ProductCreateAPIView' & 'ProductDetailAPIView' looks same but there generic is different means that one use 'RetrieveAPIView' to get the mentioned queryset and one is used to create data and save it into database
 
-    # while create using this view we want to assign something then
     def perform_create(self, serializer):
-        # this method can be called inside CreateAPIView
-
-        # to get the data that is been validated
         print(serializer.validated_data)
         title = serializer.validated_data.get('title')
         content = serializer.validated_data.get('content') or None
         if content is None:
-            # if client did not send by client then we will save content value as title
             content = title
         serializer.save(content=content)
 
 
 product_create_view = ProductCreateAPIView.as_view()
+
+
+class ProductListAPIView(generics.ListAPIView):
+    # We will not going to use this method because we can use ListCreateAPIView
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+product_list_view = ProductListAPIView.as_view()
+
+
+class ProductListCreateAPIView(generics.ListCreateAPIView):
+    # now here we can use it as GET as well as POST method to get the list of item and also to post/save the list of
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def perform_create(self, serializer):
+        title = serializer.validated_data.get('title')
+        content = serializer.validated_data.get('content') or None
+        if content is None:
+            content = title
+        serializer.save(content=content)
+
+
+product_list_create_view = ProductListCreateAPIView.as_view()
 
 
 class ProductDetailAPIView(generics.RetrieveAPIView):
