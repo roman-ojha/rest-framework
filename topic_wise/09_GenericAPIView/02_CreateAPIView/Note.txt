@@ -3,4 +3,10 @@
     -> Used for create-only endpoints.
     -> Provides a post method handler.
 
-=> 
+=> now we will create 'CreateAPIView' generic inside 'products/views.py'
+=> after this we will add another url:
+    -> urlpatterns = [
+    path('', views.product_create_view)
+]
+=> after that we will create a new py_client 'create.py' to request for '/api/products/' endpoints
+    -> NOTE: by using generic if we will not pass the required field or validate field then it will not get serialized and not get validate and that data will not get Create Using generic, it will automatically handle by generic

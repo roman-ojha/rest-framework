@@ -1,4 +1,3 @@
-from cgi import print_exception
 import requests
 
 endpoint = "http://localhost:8000/api/"
