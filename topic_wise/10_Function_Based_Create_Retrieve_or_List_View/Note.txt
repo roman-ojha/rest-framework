@@ -1,2 +1,3 @@
 => now we will try to imitate the exact functionality that we created previously using generic view like "CreateAPIView", "ListAPIView", "RetrieveAPIView"
 => after creating function view we change the urls.py views calling function
+=> and again if we will create 'not_found.py' py_client and try to get detail by giving large 'pk' value then it should respond not found 404
