@@ -1,0 +1,3 @@
+*) ListAPIView:
+    -> Used for read-only endpoints to represent a collection of model instances.
+    -> Provides a get method handler.
