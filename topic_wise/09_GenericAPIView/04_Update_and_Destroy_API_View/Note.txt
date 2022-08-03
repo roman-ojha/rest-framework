@@ -1,0 +1,8 @@
+=> In this part we will going to handle Two APIView 
+    -> UpdateAPIView
+        -> to update data
+    -> DestroyAPIView
+        -> to destroy data
+
+=> first we will create urls for these views
+=> and the we will create views Class 'ProductUpdateAPIView'

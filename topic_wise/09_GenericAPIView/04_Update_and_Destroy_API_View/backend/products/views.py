@@ -41,10 +41,27 @@ product_list_create_view = ProductListCreateAPIView.as_view()
 class ProductDetailAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    lookup_field = 'pk'
+    # lookup_field = 'pk'
 
 
 product_detail_view = ProductDetailAPIView.as_view()
+
+
+class ProductUpdateAPIView(generics.UpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+    # we can see that it is quite identical to the product detail view but we need to add 'lookup_field'
+
+    def perform_update(self, serializer):
+        # so this function will perform update to database
+        instance = serializer.save()
+        if not instance.content:
+            instance.content = instance.title
+        return super().perform_update(serializer)
+
+
+product_update_view = ProductUpdateAPIView.as_view()
 
 
 @api_view(['GET', 'POST'])
