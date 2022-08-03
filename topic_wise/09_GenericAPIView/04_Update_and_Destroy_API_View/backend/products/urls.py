@@ -11,5 +11,5 @@ urlpatterns = [
     # /api/products/1/update
     path('<int:pk>/update/', views.product_update_view),
     # /api/products/1/destroy
-    path('<int:pk>/destroy/', views.product_detail_view),
+    path('<int:pk>/delete/', views.product_destroy_view),
 ]

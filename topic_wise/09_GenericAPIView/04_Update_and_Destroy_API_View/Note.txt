@@ -5,4 +5,4 @@
         -> to destroy data
 
 => first we will create urls for these views
-=> and the we will create views Class 'ProductUpdateAPIView'
+=> and the we will create views Class 'ProductUpdateAPIView', 'ProductDestroyAPIView'
