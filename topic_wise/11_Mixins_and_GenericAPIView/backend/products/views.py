@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, mixins
 from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.response import Response
@@ -12,7 +12,6 @@ class ProductCreateAPIView(generics.CreateAPIView):
     serializer_class = ProductSerializer
 
     def perform_create(self, serializer):
-        # print(serializer.validated_data)
         title = serializer.validated_data.get('title')
         content = serializer.validated_data.get('content') or None
         if content is None:
@@ -41,21 +40,17 @@ product_list_create_view = ProductListCreateAPIView.as_view()
 class ProductDetailAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # lookup_field = 'pk'
 
 
 product_detail_view = ProductDetailAPIView.as_view()
 
 
-# UpdateAPIView
 class ProductUpdateAPIView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
-    # we can see that it is quite identical to the product detail view but we need to add 'lookup_field'
 
     def perform_update(self, serializer):
-        # so this function will perform update to database
         instance = serializer.save()
         if not instance.content:
             instance.content = instance.title
@@ -65,19 +60,43 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
 product_update_view = ProductUpdateAPIView.as_view()
 
 
-# DestroyAPIView
 class ProductDestroyAPIView(generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
 
     def perform_destroy(self, instance):
-        # now rather then getting 'serializer' we will get the instance
         return super().perform_destroy(instance)
-        # after this will run then given product id data will be deleted
 
 
 product_destroy_view = ProductDestroyAPIView.as_view()
+
+
+class ProductMixinView(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
+    # the different between function based and class based view is that:
+    # we don't condition for the different type of method rather we will write functions
+
+    # ListModelMixin:
+    #   -> Provides a .list(request, *args, **kwargs) method, that implements listing a queryset.
+    #   -> If the queryset is populated, this returns a 200 OK response, with a serialized representation of the queryset as the body of the response. The response data may optionally be paginated.
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+    # lookup_field is need for 'RetrieveModelMixin'
+
+    def get(self, request, *args, **kwargs):
+        print(args, kwargs)
+        # for '<int:pk>/' endpoint & for 'RetrieveModelMixin'
+        # runs for get method
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        # runs for post method
+        return self.list(request, *args, **kwargs)
+
+
+product_mixin_view = ProductMixinView.as_view()
 
 
 @api_view(['GET', 'POST'])

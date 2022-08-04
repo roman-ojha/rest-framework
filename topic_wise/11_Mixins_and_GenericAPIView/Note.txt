@@ -1,8 +1,6 @@
-=> In this part we will going to handle Two APIView 
-    -> UpdateAPIView
-        -> to update data
-    -> DestroyAPIView
-        -> to destroy data
+=> Now we will going to do similar to 'product_alt_view' from inside 'products/views.py' but with class based view 'ProductMixinView'
+=> after that now we can change the urls
 
-=> first we will create urls for these views
-=> and the we will create views Class 'ProductUpdateAPIView', 'ProductDestroyAPIView'
+*) Mixins:
+    -> https://www.django-rest-framework.org/api-guide/generic-views/#mixins
+    -> The mixin classes provide the actions that are used to provide the basic view behavior. Note that the mixin classes provide action methods rather than defining the handler methods, such as .get() and .post(), directly. This allows for more flexible composition of behavior.
