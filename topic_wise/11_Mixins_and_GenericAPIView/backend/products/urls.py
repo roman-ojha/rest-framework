@@ -5,7 +5,7 @@ urlpatterns = [
     # /api/products/1/
     path('<int:pk>/', views.product_mixin_view),
     # /api/products/
-    path('', views.product_create_view),
+    path('', views.product_mixin_view),
     # /api/products/list
     path('list/', views.product_mixin_view),
     # /api/products/1/update

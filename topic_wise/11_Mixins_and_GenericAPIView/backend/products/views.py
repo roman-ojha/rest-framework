@@ -72,7 +72,7 @@ class ProductDestroyAPIView(generics.DestroyAPIView):
 product_destroy_view = ProductDestroyAPIView.as_view()
 
 
-class ProductMixinView(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
+class ProductMixinView(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     # the different between function based and class based view is that:
     # we don't condition for the different type of method rather we will write functions
 
@@ -86,17 +86,39 @@ class ProductMixinView(mixins.ListModelMixin, mixins.RetrieveModelMixin, generic
     # lookup_field is need for 'RetrieveModelMixin'
 
     def get(self, request, *args, **kwargs):
+        # runs for get method
+
         print(args, kwargs)
         # for '<int:pk>/' endpoint & for 'RetrieveModelMixin'
-        # runs for get method
+        pk = kwargs.get('pk')
+        if pk is not None:
+            return self.retrieve(request, *args, **kwargs)
+
+        # for 'list/' endpoint & 'ListModelMixin'
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         # runs for post method
-        return self.list(request, *args, **kwargs)
+        # for '' endpoint & 'CreateModelMixin'
+        # it return the create method
+        return self.create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        # we also can add 'perform_create' function here because 'CreateModelMixin' provide this function
+        # this function will get called when it have to create new model
+        title = serializer.validated_data.get('title')
+        content = serializer.validated_data.get('content') or None
+        if content is None:
+            content = 'hello this is the self written content'
+        serializer.save(content=content)
 
 
 product_mixin_view = ProductMixinView.as_view()
+
+
+class CreateAPIView(mixins.CreateModelMixin, generics.GenericAPIView):
+    # Actually all the class based APIView that we see before are inherited from Mixin & GenericAPIView EX for CreateAPIView
+    pass
 
 
 @api_view(['GET', 'POST'])
