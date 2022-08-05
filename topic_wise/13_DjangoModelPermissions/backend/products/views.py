@@ -25,26 +25,10 @@ product_create_view = ProductCreateAPIView.as_view()
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.DjangoModelPermissions]
+    # now here rather then using 'isAuthenticated' permission we will going to use 'DjangoModelPermissions'
 
-    # For Permission:
-    # inside generic we can add this 'permission_classes'
-    # permission_classes = [permissions.IsAuthenticated]
-    # now here we are first authenticate use if they want to get access this view
-    # there are a different kind of authentication permission available in rest framework like:
-    # 1. AllowAny
-    # 2. isAuthenticated
-    # 3. isAdminUser
-    # 4. isAuthenticatedOrReadOnly
-    #   -> not allow POST method but allow GET method for any user
-    #   -> for authenticate user both method is allowed
-    #   -> NOTE: this is for 'ListCreateAPIView' in 'CreateAPIView' GET method is not allow by API view not by authenticating
-    # etc ..
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    permission_classes = [permissions.IsAuthenticated]
-
-    # For Authentication:
     authentication_classes = [authentication.SessionAuthentication]
-    # here we are using Session Authentication
 
     def perform_create(self, serializer):
         title = serializer.validated_data.get('title')

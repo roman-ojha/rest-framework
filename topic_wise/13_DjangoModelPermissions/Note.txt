@@ -1,5 +1,12 @@
 => https://www.django-rest-framework.org/api-guide/permissions/#djangomodelpermissions
 
+*) DjangoModelPermissions
+    -> This permission class ties into Django's standard django.contrib.auth model permissions. This permission must only be applied to views that have a .queryset property or get_queryset() method. Authorization will only be granted if the user is authenticated and has the relevant model permissions assigned.
+    -> POST requests require the user to have the add permission on the model.
+    PUT and PATCH requests require the user to have the change permission on the model.
+    DELETE requests require the user to have the delete permission on the model.
+    The default behaviour can also be overridden to support custom model permissions. For example, you might want to include a view model permission for GET requests.
+
 => here will go to:
     -> http://localhost:8000/admin/auth/user/add/
     -> and then we will add a new user
@@ -12,3 +19,4 @@
     -> now again we will create a Group where we will give a different permission using superuser admin panel
     -> after we created a group now we will go to user that we created previously and that add that user on that group
     -> so because the user that we previously create using superuser is added to the group and the group might have different permission it means that now that use also have that permission which is not permitted if user is not inside that group
+    -> after this we will going to change the permission from 'isAuthenticated' to 'DjangoModelPermissions' in 'products/views.py'
