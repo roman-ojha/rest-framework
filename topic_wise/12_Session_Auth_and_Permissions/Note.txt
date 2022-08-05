@@ -2,4 +2,19 @@
 => https://www.django-rest-framework.org/api-guide/permissions/
 
 *) Permission:
-    -> 
+    -> we will going to add 'permission_classes' on APIViews in 'products/views.py'
+
+*) Authentication:
+    -> we ca use 'authentication_classes' again on APIViews in 'products/views.py'
+    -> but first we will create a superuser
+        -> python manage.py createsuperuse
+    -> after that we will get login using admin:get
+    -> after we will get login we have session authenticated now we can access to the APIViews where user need to authenticate
+    -> but NOTE: only if we will try to get access through website page it will get authenticated but if we will try to access APIView from 'py_client' then it is not authenticated
+    -> so, we have to way to access from 'py_client' using:
+        -> first login to admin: http://localhost:8000/admin/
+        -> then then having a session
+        -> and using that session to request to the endpoint
+        -> it would be done through like : 'selenium' which will allow to keep that session to emulate the browser
+    -> But previous method is not ideal for vast majority of apis
+    -> for that we would rather use token authenticate so that py_client will easily be able to authenticate

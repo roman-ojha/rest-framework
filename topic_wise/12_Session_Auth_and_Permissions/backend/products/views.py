@@ -1,4 +1,4 @@
-from rest_framework import generics, mixins, permissions
+from rest_framework import generics, mixins, permissions, authentication
 from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.response import Response
@@ -41,6 +41,10 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     # etc ..
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     permission_classes = [permissions.IsAuthenticated]
+
+    # For Authentication:
+    authentication_classes = [authentication.SessionAuthentication]
+    # here we are using Session Authentication
 
     def perform_create(self, serializer):
         title = serializer.validated_data.get('title')
