@@ -1,0 +1,14 @@
+=> https://www.django-rest-framework.org/api-guide/permissions/#djangomodelpermissions
+
+=> here will go to:
+    -> http://localhost:8000/admin/auth/user/add/
+    -> and then we will add a new user
+    -> after that we will go the add a product model to 'products/admin.py'
+    -> after that admin can access to the Product Model database
+    -> now if we will going to admin login using newly create user and then try to go to this url: http://localhost:8000/admin/
+    -> it will say that we don't have permission
+    -> but if we will admin login using superuser and in the admin panel there i can given access to some of the data and admin have any control of how other user can access data and other stuff 
+
+    -> now again we will create a Group where we will give a different permission using superuser admin panel
+    -> after we created a group now we will go to user that we created previously and that add that user on that group
+    -> so because the user that we previously create using superuser is added to the group and the group might have different permission it means that now that use also have that permission which is not permitted if user is not inside that group
