@@ -1,0 +1,2 @@
+=> within rest framework we can set some default setting so that django rest framework will go through those default setting
+=> like we can se default authentication or permission
