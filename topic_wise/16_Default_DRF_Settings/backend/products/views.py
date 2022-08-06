@@ -13,6 +13,7 @@ from api.authentication import TokenAuthentication
 class ProductCreateAPIView(generics.CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     def perform_create(self, serializer):
         title = serializer.validated_data.get('title')
@@ -29,12 +30,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
-    # authentication_classes = [
-    #     authentication.SessionAuthentication, authentication.TokenAuthentication]
-    # Now here we are adding token based authentication as well
-    # with custom token authentication
-    authentication_classes = [
-        authentication.SessionAuthentication, TokenAuthentication]
+    # NOTE: now we don't need to add authentication class here because we had added the same authentication class as default inside settings.py but because permission is different in this view we will add permission_classes
 
     def perform_create(self, serializer):
         title = serializer.validated_data.get('title')
@@ -50,6 +46,7 @@ product_list_create_view = ProductListCreateAPIView.as_view()
 class ProductDetailAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
 
 product_detail_view = ProductDetailAPIView.as_view()
@@ -59,6 +56,7 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     def perform_update(self, serializer):
         instance = serializer.save()
@@ -74,6 +72,7 @@ class ProductDestroyAPIView(generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     def perform_destroy(self, instance):
         return super().perform_destroy(instance)

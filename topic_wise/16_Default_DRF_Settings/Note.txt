@@ -1,2 +1,21 @@
+=> https://www.django-rest-framework.org/api-guide/settings/
 => within rest framework we can set some default setting so that django rest framework will go through those default setting
 => like we can se default authentication or permission
+=> Now we will going to add some code inside settings.py for default authentication and permission:
+    -> auth_class = [
+        "rest_framework.authentication.SessionAuthentication",
+        "api.authentication.TokenAuthentication",
+    ]
+    if DEBUG:
+        auth_class = [
+            "api.authentication.TokenAuthentication",
+        ]
+    REST_FRAMEWORK = {
+        "DEFAULT_AUTHENTICATION_CLASSES": auth_class,
+        "DEFAULT_PERMISSION_CLASSES": [
+            "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+        ]
+    }
+
+=> if we want to override these authentication and permission we can do that inside individual views
+=> so we will going to override permission class inside 'products/views.py'
