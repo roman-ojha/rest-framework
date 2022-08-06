@@ -7,6 +7,7 @@ from django.http import Http404
 from .models import Product
 from .serializers import ProductSerializer
 from .permissions import IsStaffEditorPermission
+from api.authentication import TokenAuthentication
 
 
 class ProductCreateAPIView(generics.CreateAPIView):
@@ -28,9 +29,12 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
-    authentication_classes = [
-        authentication.SessionAuthentication, authentication.TokenAuthentication]
+    # authentication_classes = [
+    #     authentication.SessionAuthentication, authentication.TokenAuthentication]
     # Now here we are adding token based authentication as well
+    # with custom token authentication
+    authentication_classes = [
+        authentication.SessionAuthentication, TokenAuthentication]
 
     def perform_create(self, serializer):
         title = serializer.validated_data.get('title')

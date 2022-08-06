@@ -10,3 +10,7 @@
     ]
 => now we will add 'TokenAuthentication' inside 'products/views.py'
 => now inside the 'py_client' we will create 'auth.py' for token based authentication
+=> after that we will add that auth function inside 'list.py' so that can have permission to access the APIView using token based authentication
+
+=> on header while authenticating user "Token" keyword is rest_framework default way to authenticate but if we want to change that keyword to 'Bearer' then we can do that by:
+    => we will going to create 'authentication.py' inside 'api/' and override the keyword
