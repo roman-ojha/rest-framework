@@ -1,0 +1,11 @@
+=> if the create user which doesn't have any permission to do any thing then also if that user goes to :http://localhost:8000/api/products/list/, that user can see all the list of item
+=> but this should not be the case so for that we will create a Custom Permission
+
+*) Custom Permission:
+    -> https://www.django-rest-framework.org/api-guide/permissions/#custom-permissions
+    -> There are different kind of example that you can look into:
+        -> https://www.django-rest-framework.org/api-guide/permissions/#examples
+
+=> To be able to create custom permission for 'DjangoModelPermissions' we have to override 'DjangoModelPermissions' and set the '.perms_map' property
+=> so we will going to create 'permission.py' inside 'products'
+=> after we create custom permission we will going to add that custom permission inside the 'ProductListCreateAPIView' APIView

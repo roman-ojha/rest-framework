@@ -1,10 +1,12 @@
 from rest_framework import generics, mixins, permissions, authentication
-from .models import Product
-from .serializers import ProductSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+
+from .models import Product
+from .serializers import ProductSerializer
+from .permissions import IsStaffEditorPermission
 
 
 class ProductCreateAPIView(generics.CreateAPIView):
@@ -25,8 +27,8 @@ product_create_view = ProductCreateAPIView.as_view()
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.DjangoModelPermissions]
-    # now here rather then using 'isAuthenticated' permission we will going to use 'DjangoModelPermissions'
+    # now we will add custom permission inside Permission class
+    permission_classes = [IsStaffEditorPermission]
 
     authentication_classes = [authentication.SessionAuthentication]
 
