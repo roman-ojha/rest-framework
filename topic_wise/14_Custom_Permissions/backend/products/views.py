@@ -27,8 +27,10 @@ product_create_view = ProductCreateAPIView.as_view()
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # now we will add custom permission inside Permission class
-    permission_classes = [IsStaffEditorPermission]
+    # now we will add custom permission inside Permission class as well to access this view we can add 'IsAdminUser' permission as well
+    # first -> user need to be admin
+    # then -> IsStaffEditorPermission
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     authentication_classes = [authentication.SessionAuthentication]
 
