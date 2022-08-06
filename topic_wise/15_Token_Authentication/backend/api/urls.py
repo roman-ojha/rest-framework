@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('auth/', obtain_auth_token),
+    # 'obtain_auth_token' will generate token based after use get login using 'username' and password
     path('', views.api_home, name="home")
 ]

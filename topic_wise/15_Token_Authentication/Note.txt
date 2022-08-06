@@ -1,3 +1,4 @@
+=> https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
 => So now we will add token based authentication so that our 'py_client' can talk to rest-framework
 => so inside 'cfehome/setting.py' we will add:
     -> INSTALLED_APPS = [
@@ -14,3 +15,20 @@
 
 => on header while authenticating user "Token" keyword is rest_framework default way to authenticate but if we want to change that keyword to 'Bearer' then we can do that by:
     => we will going to create 'authentication.py' inside 'api/' and override the keyword
+    => we can now add a custom token authentication inside 'authentication.py'
+
+=> If you want to get information about Token:
+    -> python manage.py shell
+    -> from rest_framework.authtoken.models import *
+    -> Token
+    -> Token.objects.all()
+    -> Token.objects.all().first()
+    -> dir(Token.objects.all().first())
+    -> token_obj=Token.objects.first()
+    -> token_obj.created
+
+=> can study about expiry date of token by you self
+
+=> This is The way to create Token based authentication
+=> but if you want to create custom authentication then we can do that as well:
+    -> https://www.django-rest-framework.org/api-guide/authentication/#custom-authentication
