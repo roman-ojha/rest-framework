@@ -1,0 +1,12 @@
+=> So now we will add token based authentication so that our 'py_client' can talk to rest-framework
+=> so inside 'cfehome/setting.py' we will add:
+    -> INSTALLED_APPS = [
+        'rest_framework.authtoken',
+    ]
+=> python manage.py migrate
+=> now we will create a endpoint to generate the auth_token inside 'api/urls.py'
+    => urlpatterns = [
+        path('auth/', obtain_auth_token),
+    ]
+=> now we will add 'TokenAuthentication' inside 'products/views.py'
+=> now inside the 'py_client' we will create 'auth.py' for token based authentication
