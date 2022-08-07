@@ -127,21 +127,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Default Rest Framework Settings:
 auth_class = [
-    # so we will going to see the default authentication classes for all views and we will going to change if we needed in specific views that we want to
     "rest_framework.authentication.SessionAuthentication",
-    # just import as and string the authentication that you want
-    # also we had added custom token authentication so we will going to import that authentication class
     "api.authentication.TokenAuthentication",
 ]
-if DEBUG:
-    # we are adding different authentication class in DEBUG mode
-    auth_class = [
-        "api.authentication.TokenAuthentication",
-    ]
+# if DEBUG:
+#     auth_class = [
+#         "api.authentication.TokenAuthentication",
+#     ]
 REST_FRAMEWORK = {
-    # default authentication for all of our views
     "DEFAULT_AUTHENTICATION_CLASSES": auth_class,
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"

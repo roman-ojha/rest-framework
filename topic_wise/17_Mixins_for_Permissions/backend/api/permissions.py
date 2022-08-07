@@ -11,6 +11,3 @@ class IsStaffEditorPermission(permissions.DjangoModelPermissions):
         'PATCH': ['%(app_label)s.change_%(model_name)s'],
         'DELETE': ['%(app_label)s.delete_%(model_name)s'],
     }
-    # def has_permission(self, request, view):
-    #     if not request.user.is_staff:
-    #         return False
