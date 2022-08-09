@@ -9,6 +9,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
+            'pk',
             'title',
             'content',
             'price',
@@ -17,7 +18,6 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
 
     def get_my_discount(self, obj):
-        # now when client will Post request by passing data and then we will serialize that data at that time that data will not contain the instance of 'get_discount()' because we have not still created the model instance so we have to check for taht
         if not hasattr(obj, 'id'):
             return None
         if not isinstance(obj, Product):

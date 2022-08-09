@@ -7,19 +7,13 @@ from django.http import Http404
 from .models import Product
 from .serializers import ProductSerializer
 from api.mixins import StaffEditorPermissionMixin
-# first import created mixins
 
 
 class ProductCreateAPIView(
         StaffEditorPermissionMixin,
         generics.CreateAPIView):
-    # now we will Inherit that mixin for this class
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
-    # now we don't need these permission classes because we had added it as mixins class
-    # but if you want to override those default mixins permission you can override here
-    # permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     def perform_create(self, serializer):
         title = serializer.validated_data.get('title')

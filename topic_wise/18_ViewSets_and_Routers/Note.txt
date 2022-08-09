@@ -1,6 +1,5 @@
-=> now the first thing that we will going to do is to move the 'products/permissions.py' file to 'api/' folder
-=> because we want to use that permission throughout the all 'api/' endpoint
-=> now we will going to create 'api/mixins.py' file and create mixin there
-=> now we will add that mixins into 'products/views.py'
-
-=> NOTE that we wan use mixins for every thing that you don't want to repeat you can make mixins of that
+=> first we will going to create file called 'viewsets.py' inside 'products'
+=> we can be able to add viewsets inside 'views.py' but right now it is quite full so we will create it's own file
+=> now again let we create 'routers.py' file inside 'cfehome'
+=> and again we can put routers inside urls.py but right now we will create it's own file
+=> after creating router we will going to add that router inside 'cfehome/urls.py'
