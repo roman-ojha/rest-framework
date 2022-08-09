@@ -1,0 +1,6 @@
+=> now the first thing that we will going to do is to move the 'products/permissions.py' file to 'api/' folder
+=> because we want to use that permission throughout the all 'api/' endpoint
+=> now we will going to create 'api/mixins.py' file and create mixin there
+=> now we will add that mixins into 'products/views.py'
+
+=> NOTE that we wan use mixins for every thing that you don't want to repeat you can make mixins of that
