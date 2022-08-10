@@ -1,0 +1,2 @@
+=> now we will going to add urls to our serializers so that we can get the detail view or any of the other views that we need inside of our ProductListView
+=> so first we will go to products 'serializers.py'
