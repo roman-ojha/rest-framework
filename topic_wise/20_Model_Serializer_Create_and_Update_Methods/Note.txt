@@ -1,0 +1,3 @@
+=> now we will go to 'products/serializers.py' where we will add new file 'email' and serialize that email
+=> and also we will override the create method through which we will extract the email value
+=> we can do that using 'create' method inside serializer class but we can also sdo that inside the 'perform_create' method inside the APIViews so we will again try to create the came functionality using 'perform_create' method

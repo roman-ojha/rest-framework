@@ -6,24 +6,23 @@ from .models import Product
 
 class ProductSerializer(serializers.ModelSerializer):
     my_discount = serializers.SerializerMethodField(read_only=True)
-    # create new url serializers
-    # for 'product-detail'
     url = serializers.SerializerMethodField(read_only=True)
-    # for 'product-edit'
     edit_url = serializers.SerializerMethodField(read_only=True)
 
-    # another method
     url_hyper = serializers.HyperlinkedIdentityField(
         view_name='product-detail', lookup_field='pk')
-    # 'HyperlinkedIdentityField' only work for 'ModelSerializer'
+    # so what if every time you create a new product you want to have a one of email send to somebody
+    email = serializers.EmailField(write_only=True)
+    # we will use 'write_only' because it doesn't exist inside model and we can write on that field
 
     class Meta:
         model = Product
+        # that the 'ProductSerializer' will do is it will create the data inside the 'Product' model itself
         fields = [
             'url',
-            # add it into field
             'edit_url',
             'url_hyper',
+            'email',
             'pk',
             'title',
             'content',
@@ -32,30 +31,43 @@ class ProductSerializer(serializers.ModelSerializer):
             'my_discount'
         ]
 
-    def get_url(self, obj):
-        # serializer method
-        # return f"/api/products/{obj.pk}/"
-        # now this will return the url or that particular obj/product
+    def create(self, validated_data):
+        # which creating new model data we can override that method
+        # so when it will create the new data it will also validate that data
+        # and so this create method will take that validated data
+        # by default : Product.objects.create(**validated_data)
 
-        # but if we will change the path to another else then we have to manually change it here as well to solve that problem we will going to use 'reverse'
+        # email = validated_data.pop('email')
+        # now here because email doesn't exist inside model field we have to pop it of so that which create new model from the validated_date it wouldn't through error
+        # after popping it up we will now get the email value from the serializer
+        obj = super().create(validated_data)
+        # print(email, obj)
+
+        # default return value
+        return obj
+
+    # if there is not an instance then it will call 'create' method but if there is an instance then it will call 'update' method
+    def update(self, instance, validated_data):
+        # this method will update the instance it self
+        email = validated_data.pop('email')
+        instance.title = validated_data.get('title')
+
+        # update instance data
+        # return instance
+        # or
+        return super().update(instance, validated_data)
+
+    def get_url(self, obj):
         request = self.context.get('request')
-        # first we will get the request object
-        # we will by default get the request object if we are now manually declare/define serializer inside views
         if request is None:
             return None
-        # if request exist then we will going to put it as an argument inside reverse
         return reverse("product-detail", kwargs={"pk": obj.pk}, request=request)
-        # 'product-detail' is coming from the name of the urls that we define inside 'products/urls.py'
-        # now this will return the whole path like: 'http://127.0.0.1:8000/api/products/1/' from this get_url function
 
     def get_edit_url(self, obj):
-        # this urls is for '<int:pk>/update/'
         request = self.context.get('request')
         if request is None:
             return None
         return reverse("product-edit", kwargs={"pk": obj.pk}, request=request)
-        # this will return ex: 'http://127.0.0.1:8000/api/products/1/update/'
-        # NOTE: if you don't want these url for some of the view then you have to create different Serializers Class for that specific View
 
     def get_my_discount(self, obj):
         if not hasattr(obj, 'id'):

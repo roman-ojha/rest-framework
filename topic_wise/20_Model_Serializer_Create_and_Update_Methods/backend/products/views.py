@@ -33,6 +33,10 @@ class ProductListCreateAPIView(
     serializer_class = ProductSerializer
 
     def perform_create(self, serializer):
+        # now here we can again can be able the grab the same value 'email' from the serializer and pop it out before we will save that data
+        email = serializer.validated_data.pop('email')
+        print(email)
+
         title = serializer.validated_data.get('title')
         content = serializer.validated_data.get('content') or None
         if content is None:
