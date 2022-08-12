@@ -1,0 +1,4 @@
+=> Now we will going to add custom validation with serializers
+=> there is a different approach for this 
+=> the simple approach is in any kind of the serializer for that we pick the field that we want to validate our data from
+=> 

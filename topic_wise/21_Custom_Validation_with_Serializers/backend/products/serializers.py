@@ -28,8 +28,32 @@ class ProductSerializer(serializers.ModelSerializer):
             'my_discount'
         ]
 
+    # to validated the specific data we will define function like this:
+    # def validate_<field_name>()
+    def validate_title(self, value):
+        # in this case we are validating title
+        # here we will get self & value the value is the title value
+        # this function is now only for read only this can be able to use when we want to validate the data
+
+        # now by default we will return value like this
+        # print(value)
+        # return value
+
+        qs = Product.objects.filter(title__exact=value)
+        # so what we can do is and what we are doing here is we are checking does the 'value' exist in product data already
+
+        qs = Product.objects.filter(title__iexact=value)
+        # case insensitive
+
+        if qs.exists():
+            # after validate and if it fail the we can raise the error
+            raise serializers.ValidationError(
+                f"{value} is already a product name")
+        # if title value doesn't exist as title in database then we will going to return exact value
+        return value
+
     def create(self, validated_data):
-        # email = validated_data.pop('email')
+        email = validated_data.pop('email')
         obj = super().create(validated_data)
         # print(email, obj)
         return obj
