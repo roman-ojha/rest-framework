@@ -1,7 +1,9 @@
 from dataclasses import field
+from wsgiref.validate import validator
 from rest_framework import serializers
 from rest_framework.reverse import reverse
 from .models import Product
+from .validators import validate_title
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -12,6 +14,10 @@ class ProductSerializer(serializers.ModelSerializer):
     url_hyper = serializers.HyperlinkedIdentityField(
         view_name='product-detail', lookup_field='pk')
     email = serializers.EmailField(write_only=True)
+
+    # another way to validate data field using serializers
+    title = serializers.CharField(validators=[validate_title])
+    # we will add the list of validator that we can use for that field
 
     class Meta:
         model = Product
@@ -35,11 +41,14 @@ class ProductSerializer(serializers.ModelSerializer):
         # here we will get self & value the value is the title value
         # this function is now only for read only this can be able to use when we want to validate the data
 
+        request = self.context.get('request')
+        user = request.user
+
         # now by default we will return value like this
         # print(value)
         # return value
 
-        qs = Product.objects.filter(title__exact=value)
+        qs = Product.objects.filter(user=user, title__exact=value)
         # so what we can do is and what we are doing here is we are checking does the 'value' exist in product data already
 
         qs = Product.objects.filter(title__iexact=value)

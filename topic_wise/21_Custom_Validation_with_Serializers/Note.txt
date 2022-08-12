@@ -1,4 +1,7 @@
 => Now we will going to add custom validation with serializers
 => there is a different approach for this 
 => the simple approach is in any kind of the serializer for that we pick the field that we want to validate our data from
-=> 
+=> another way to validate it by create new module file call 'validators.py'
+    -> validators are useful in many context
+    -> not just for the rest framework but you can create validators for model, model forms
+    -> NOTE that if you already have the validator on the model then you don't have to create the validator for django rest framework serializer
