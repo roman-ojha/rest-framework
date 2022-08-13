@@ -3,7 +3,7 @@ from wsgiref.validate import validator
 from rest_framework import serializers
 from rest_framework.reverse import reverse
 from .models import Product
-from .validators import validate_title
+from .validators import validate_title, validate_title_no_hello, unique_product_title
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -16,8 +16,12 @@ class ProductSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(write_only=True)
 
     # another way to validate data field using serializers
-    title = serializers.CharField(validators=[validate_title])
+    title = serializers.CharField(
+        validators=[validate_title, validate_title_no_hello, unique_product_title])
     # we will add the list of validator that we can use for that field
+
+    name = serializers.CharField(source='title', read_only=True)
+    # we can even create new field inside serializer which will take the value of another field which we will define inside source argument
 
     class Meta:
         model = Product
@@ -28,6 +32,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'email',
             'pk',
             'title',
+            'name',
             'content',
             'price',
             'sale_price',

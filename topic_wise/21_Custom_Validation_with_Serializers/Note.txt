@@ -5,3 +5,4 @@
     -> validators are useful in many context
     -> not just for the rest framework but you can create validators for model, model forms
     -> NOTE that if you already have the validator on the model then you don't have to create the validator for django rest framework serializer
+=> 
