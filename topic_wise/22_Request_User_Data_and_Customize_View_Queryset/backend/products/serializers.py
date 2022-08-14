@@ -23,6 +23,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
+            # 'user',
+            # now we can add the user data here
+            # but I and the user that owns this data like queryset is associated now in view is only directly to the authorized user so I don't want my own information on this serializer data
             'url',
             'edit_url',
             'url_hyper',

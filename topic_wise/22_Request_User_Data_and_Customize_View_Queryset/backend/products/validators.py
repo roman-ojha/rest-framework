@@ -14,8 +14,9 @@ def validate_title(value):
 
 def validate_title_no_hello(value):
     if "hello" in value.lower():
-        raise serializers.ValidationError("Hello is now allowed")
+        raise serializers.ValidationError(f"{value} is now allowed")
     return value
 
 
-unique_product_title = UniqueValidator(queryset=Product.objects.all())
+unique_product_title = UniqueValidator(
+    queryset=Product.objects.all(), lookup='iexact')
