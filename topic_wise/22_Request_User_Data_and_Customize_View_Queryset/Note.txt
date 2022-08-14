@@ -1,0 +1,17 @@
+=> now we will update the product model and add Default User Model as well
+=> because we make some changes in model have to migrate now
+    -> python manage.py makemigrations
+    -> python manage.py migrate
+
+=> now we will update the serializer because we have added new field in model so we have to serialize that field
+
+=> after that we will customize Product view Queryset
+=> now we can even use that 'get_queryset' as mixins
+    -> so we will create mixin 'UserQuerysetMixin' inside 'api/mixins.py'
+    -> now we can add create mixin inside view
+    -> now if we will access that view where we had added custom queryset there if the user in not admin then it will only be able to access the data that is create by the same user
+    -> but if it is access by admin it can access the whole data
+
+=> it means that now we filtered down the queryset the data that can be able to access the the certain user
+
+=> now we can add this custom queryset into any view that is require this custom queryset
