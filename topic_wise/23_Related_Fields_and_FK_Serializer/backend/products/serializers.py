@@ -9,6 +9,13 @@ from api.serializers import UserPublicSerializer
 # now we will import that UserPublicSerializer Here
 
 
+# we will also add new ProductInlineSerializer here
+class ProductInlineSerializer(serializers.Serializer):
+    url_hyper = serializers.HyperlinkedIdentityField(
+        view_name='product-detail', lookup_field='pk', read_only=True)
+    title = serializers.CharField(read_only=True)
+
+
 class ProductSerializer(serializers.ModelSerializer):
     # now here we will add field for serializer user data
     my_user_data = serializers.SerializerMethodField(read_only=True)
@@ -17,6 +24,10 @@ class ProductSerializer(serializers.ModelSerializer):
     user = UserPublicSerializer(read_only=True)
     owner = UserPublicSerializer(source='user', read_only=True)
     # also we can be able to use owner with source as user
+
+    related_products = ProductInlineSerializer(
+        source='user.product_set.all', read_only=True, many=True)
+    # and access that ProductInlineSerializer here
 
     my_discount = serializers.SerializerMethodField(read_only=True)
     url = serializers.SerializerMethodField(read_only=True)
@@ -48,8 +59,10 @@ class ProductSerializer(serializers.ModelSerializer):
             'price',
             'sale_price',
             'my_discount',
-            'my_user_data'
+            'my_user_data',
             # add that field here
+            'related_products'
+            # and add that related_products here
         ]
 
     # now we can define that my_user_data
