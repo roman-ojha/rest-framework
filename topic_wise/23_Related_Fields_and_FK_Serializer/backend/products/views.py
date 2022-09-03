@@ -28,7 +28,6 @@ product_create_view = ProductCreateAPIView.as_view()
 
 class ProductListCreateAPIView(
         UserQuerysetMixin,
-        # after creating mixins of the queryset we will include that in here
         StaffEditorPermissionMixin,
         generics.ListCreateAPIView):
     queryset = Product.objects.all()
@@ -41,27 +40,6 @@ class ProductListCreateAPIView(
         if content is None:
             content = title
         serializer.save(user=self.request.user, content=content)
-        # now we will
-
-    # def get_queryset(self, *args, **kwargs):
-    #     qs = super().get_queryset(*args, **kwargs)
-    #     # we can get the default query set here like this
-    #     request = self.request
-    #     # inside the view to access the request we will use 'self.request'
-    #     # in serializer we will use 'self.context.get('request')' if it have the request
-    #     print(request.user)
-
-    #     user = request.user
-    #     if not user.is_authenticated:
-    #         # of even what we can do is we can check for authentication here as well
-    #         # and if not authenticated as admin then we will going to return none product
-    #         return Product.objects.none()
-
-    #     # default return:
-    #     # return super().get_queryset(*args, **kwargs)
-
-    #     # filtered return
-    #     return qs.filter(user=request.user)
 
 
 product_list_create_view = ProductListCreateAPIView.as_view()

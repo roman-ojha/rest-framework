@@ -1,2 +1,6 @@
 => Now here we will look into how to do related field serialization and foreign key serialization
-=> 
+=> First we will see how we can serialize user data in 'products/serializer.py'
+    => But this is not the prefer way to serialize the related field data 
+    => instead what we can do is create a new serializer on 'api/ serializer.py'
+    => yes so what we can do is create a new serializer class for User data
+    => After create a UserPublicSerializer we will add that serializer to 'products/serializer.py'

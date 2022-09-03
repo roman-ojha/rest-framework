@@ -2,11 +2,22 @@ from dataclasses import field
 from wsgiref.validate import validator
 from rest_framework import serializers
 from rest_framework.reverse import reverse
+
 from .models import Product
 from .validators import validate_title, validate_title_no_hello, unique_product_title
+from api.serializers import UserPublicSerializer
+# now we will import that UserPublicSerializer Here
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    # now here we will add field for serializer user data
+    my_user_data = serializers.SerializerMethodField(read_only=True)
+
+    # Now after creating new UserPublicSerializer we can add that here
+    user = UserPublicSerializer(read_only=True)
+    owner = UserPublicSerializer(source='user', read_only=True)
+    # also we can be able to use owner with source as user
+
     my_discount = serializers.SerializerMethodField(read_only=True)
     url = serializers.SerializerMethodField(read_only=True)
     edit_url = serializers.SerializerMethodField(read_only=True)
@@ -23,9 +34,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            # 'user',
-            # now we can add the user data here
-            # but I and the user that owns this data like queryset is associated now in view is only directly to the authorized user so I don't want my own information on this serializer data
+            'user',
+            'owner',
+            # now that User data can add
             'url',
             'edit_url',
             'url_hyper',
@@ -36,8 +47,17 @@ class ProductSerializer(serializers.ModelSerializer):
             'content',
             'price',
             'sale_price',
-            'my_discount'
+            'my_discount',
+            'my_user_data'
+            # add that field here
         ]
+
+    # now we can define that my_user_data
+    def get_my_user_data(self, obj):
+        return{
+            "username": obj.user.username
+        }
+        # But this is not the prefer way to serialize the related field data
 
     def validate_title(self, value):
         request = self.context.get('request')
