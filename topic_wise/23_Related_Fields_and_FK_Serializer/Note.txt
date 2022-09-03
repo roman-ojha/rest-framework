@@ -1,0 +1,2 @@
+=> Now here we will look into how to do related field serialization and foreign key serialization
+=> 
