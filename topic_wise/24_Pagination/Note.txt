@@ -1,0 +1,33 @@
+=> https://www.django-rest-framework.org/api-guide/pagination/
+=> when you are end of using a query set or list view then it is good to use pagination
+=> let's say that if user add tons of amount of product then we don't want all of the product to get displayed or fetched in every request
+=> so what we want to do is we want to do pagination on all list view queryset
+    -> for that we will going to go to setting.py and add:
+    -> REST_FRAMEWORK = {
+        "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+        "PAGE_SIZE": 10
+    }
+    -> now after that new we will try to do query on 'http://127.0.0.1:8000/api/products/list/' and get the list view we will see different kind of lookup
+    -> {
+        "count": 16,
+        "next": "http://127.0.0.1:8000/api/products/list/?limit=10&offset=10",
+        "previous": null,
+        "results": [
+            {
+                "owner": {
+                    "username": "romanojha",
+                    "id": 1
+                },
+                "url": "http://127.0.0.1:8000/api/products/1/",
+                "edit_url": "http://127.0.0.1:8000/api/products/1/update/",
+                "url_hyper": "http://127.0.0.1:8000/api/products/1/",
+                "pk": 1,
+                "title": "Hello world my old friend",
+                "name": "Hello world my old friend",
+                "content": "this is content",
+                "price": "138.94",
+                "sale_price": "111.15"
+            }
+        ]
+    }
+    -> next contain the query url for getting next product

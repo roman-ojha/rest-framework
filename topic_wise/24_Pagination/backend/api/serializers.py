@@ -9,14 +9,11 @@ class UserPublicSerializer(serializers.ModelSerializer):
     username = serializers.CharField(read_only=True)
     id = serializers.IntegerField(read_only=True)
 
-    other_products = serializers.SerializerMethodField(read_only=True)
-
     class Meta:
         model = User
         fields = [
             'username',
             'id',
-            'other_products'
         ]
 
     def get_other_products(self, obj):
