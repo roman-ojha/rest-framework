@@ -16,8 +16,10 @@ class SearchListView(generics.ListAPIView):
         qs = super().get_queryset(*args, **kwargs)
         q = self.request.GET.get('q')
         # we will get the query that user try to do
-        user = None
-        if self.request.user.is_authenticated:
-            user = self.request.user
-        results = qs.search(q, user=user)
+        results = Product.objects.none()
+        if q is not None:
+            user = None
+            if self.request.user.is_authenticated:
+                user = self.request.user
+            results = qs.search(q, user=user)
         return results

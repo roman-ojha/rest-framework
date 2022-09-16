@@ -17,7 +17,7 @@ class ProductQuerySet(models.QuerySet):
 
     def search(self, query, user=None):
         # now here we will implement search feature
-        lookup = Q(title_icontains=query) | Q(content_icontains=query)
+        lookup = Q(title__icontains=query) | Q(content__icontains=query)
         # here this look up will look into 'title' and 'content' field in the Product
         qs = self.is_public().filter(lookup)
         if user is not None:
