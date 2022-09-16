@@ -6,3 +6,5 @@
 => now we will create a new app for search:
     -> python manage.py startapp search
     -> we had create the new app so that we want to separate view from other views
+=> now we will implement urls & views for search app
+=> and we will add that search urls into our main url on 'cfehome'

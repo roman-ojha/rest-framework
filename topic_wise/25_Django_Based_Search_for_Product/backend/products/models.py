@@ -19,9 +19,10 @@ class ProductQuerySet(models.QuerySet):
         # now here we will implement search feature
         lookup = Q(title_icontains=query) | Q(content_icontains=query)
         # here this look up will look into 'title' and 'content' field in the Product
-        qs = self.filter(lookup)
+        qs = self.is_public().filter(lookup)
         if user is not None:
-            qs = qs.filter(user=user)
+            qs2 = self.filter(user=user).filter(lookup)
+            qs = (qs | qs2).distinct()
         return qs
 
 
@@ -41,6 +42,7 @@ class ProductManager(models.Manager):
 
         # because we have override the default 'get_queryset' now rather we can do this and add 'is_public()' function & 'search()' function
         return self.get_queryset().is_public().search(query, user=user)
+        # we had added 'is_public' function on 'search' function so need to add it in here
 
 
 class Product(models.Model):
@@ -49,7 +51,9 @@ class Product(models.Model):
     title = models.CharField(max_length=120)
     content = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=15, decimal_places=2, default=99.99)
+    # we will add new two field here
     public = models.BooleanField(default=True)
+    objects = ProductManager()
 
     @property
     def sale_price(self):
