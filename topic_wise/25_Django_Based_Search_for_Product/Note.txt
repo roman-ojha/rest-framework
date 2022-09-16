@@ -1,0 +1,6 @@
+=> Here we will going to implement basic search of the product
+=> first we will add new 'public' field on product model 'products/model.py'
+=> after that we will make a migration:
+    -> python manage.py makemigrations
+    -> python manage.py migrate
+=> now we will add Search logic
