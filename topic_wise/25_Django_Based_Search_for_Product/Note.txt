@@ -3,4 +3,6 @@
 => after that we will make a migration:
     -> python manage.py makemigrations
     -> python manage.py migrate
-=> now we will add Search logic
+=> now we will create a new app for search:
+    -> python manage.py startapp search
+    -> we had create the new app so that we want to separate view from other views
