@@ -1,4 +1,27 @@
 [[package]]
+name = "algoliasearch"
+version = "2.6.2"
+description = "Algolia Search API Client for Python."
+category = "main"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
+
+[package.dependencies]
+requests = ">=2.21,<3.0"
+
+[[package]]
+name = "algoliasearch-django"
+version = "2.0.0"
+description = "Algolia Search integration for Django"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+algoliasearch = ">=2.0,<3.0"
+django = ">=1.7"
+
+[[package]]
 name = "asgiref"
 version = "3.5.2"
 description = "ASGI specs, helper code, and adapters"
@@ -97,6 +120,14 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "python-decouple"
+version = "3.6"
+description = "Strict separation of settings from code."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "pytz"
 version = "2022.1"
 description = "World timezone definitions, modern and historical"
@@ -170,9 +201,17 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b56a29592d3467684c2148f11f6b9dddc71d55b07aa22f5ec394e9737e3aeb06"
+content-hash = "39a815b27313577d9af54236a1ebe2aa6accfa9c21a2b6f5fceb7ec32769f415"
 
 [metadata.files]
+algoliasearch = [
+    {file = "algoliasearch-2.6.2-py2.py3-none-any.whl", hash = "sha256:8efe9cab6e4806f9a233fd5db4f56ed00ebae55e9825ec3fd698df6413c0c80b"},
+    {file = "algoliasearch-2.6.2.tar.gz", hash = "sha256:46a27fa77636221d68787e9fbb3613f29d1283f328e855efba1a90ba49265949"},
+]
+algoliasearch-django = [
+    {file = "algoliasearch-django-2.0.0.tar.gz", hash = "sha256:0a8b7d07d52e4042709755a5839e0e1ba5bdfb965ea6b21286460db52061e0f9"},
+    {file = "algoliasearch_django-2.0.0-py2.py3-none-any.whl", hash = "sha256:b36e9d69bd5b97ad439cf941d87f8131932be844f5d383928f453de9eece4dbe"},
+]
 asgiref = [
     {file = "asgiref-3.5.2-py3-none-any.whl", hash = "sha256:1d2880b792ae8757289136f1db2b7b99100ce959b2aa57fd69dab783d05afac4"},
     {file = "asgiref-3.5.2.tar.gz", hash = "sha256:4a29362a6acebe09bf1d6640db38c1dc3d9217c68e6f9f6204d72667fc19a424"},
@@ -208,6 +247,10 @@ idna = [
 pycodestyle = [
     {file = "pycodestyle-2.8.0-py2.py3-none-any.whl", hash = "sha256:720f8b39dde8b293825e7ff02c475f3077124006db4f440dcbc9a20b76548a20"},
     {file = "pycodestyle-2.8.0.tar.gz", hash = "sha256:eddd5847ef438ea1c7870ca7eb78a9d47ce0cdb4851a5523949f2601d0cbbe7f"},
+]
+python-decouple = [
+    {file = "python-decouple-3.6.tar.gz", hash = "sha256:2838cdf77a5cf127d7e8b339ce14c25bceb3af3e674e039d4901ba16359968c7"},
+    {file = "python_decouple-3.6-py3-none-any.whl", hash = "sha256:6cf502dc963a5c642ea5ead069847df3d916a6420cad5599185de6bab11d8c2e"},
 ]
 pytz = [
     {file = "pytz-2022.1-py2.py3-none-any.whl", hash = "sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c"},

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party api services
+    'algoliasearch_django',
     'rest_framework',
     'rest_framework.authtoken',
     'api',
@@ -143,4 +146,12 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
+}
+ALGOLIA_APPLICATION_ID = config('ALGOLIA_APPLICATION_ID')
+ALGOLIA_API_KEY = config('ALGOLIA_API_KEY')
+
+ALGOLIA = {
+    'APPLICATION_ID': ALGOLIA_APPLICATION_ID,
+    'API_KEY': ALGOLIA_API_KEY,
+    'INDEX_PREFIX': 'cfe'
 }

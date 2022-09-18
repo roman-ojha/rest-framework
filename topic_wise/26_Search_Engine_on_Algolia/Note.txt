@@ -1,0 +1,15 @@
+=> https://www.algolia.com/
+-> Create app then Setup up for Django:
+    -> https://www.algolia.com/doc/framework-integration/django/setup/?client=python
+    -> poetry add algoliasearch-django=^2.0
+    -> pip install --upgrade 'algoliasearch-django>=2.0,<3.0'
+    -> On Settings.py:
+        -> INSTALLED_APPS = [
+            'algoliasearch_django',
+         ]
+    -> Create configuration on Setting.py:
+        -> ALGOLIA = {
+            'APPLICATION_ID': ALGOLIA_APPLICATION_ID,
+            'API_KEY': ALGOLIA_API_KEY,
+            'INDEX_PREFIX': 'cfe'
+        }
