@@ -13,3 +13,14 @@
             'API_KEY': ALGOLIA_API_KEY,
             'INDEX_PREFIX': 'cfe'
         }
+
+=> so we have to design our index that so that we can filter the data that we want to send to algolia, we don't want to send all of the data from our database to go to algolia
+-> for that we will create 'products/index.py'
+-> Algolia command:
+    algolia_applysettings
+    algolia_clearindex
+    algolia_reindex
+
+-> Now run this:
+    -> python manage.py algolia_reindex
+-> after that we will be able to see those data into algolia
