@@ -24,3 +24,5 @@
 -> Now run this:
     -> python manage.py algolia_reindex
 -> after that we will be able to see those data into algolia
+
+-> So when we change our product index we have to reindex that using same command
