@@ -1,1 +1,5 @@
-### 
+### GET to get student detail
+GET http://localhost:8000/detail/3
+
+### GET all student
+GET http://localhost:8000/detail
