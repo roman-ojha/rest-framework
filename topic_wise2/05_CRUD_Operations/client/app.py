@@ -20,8 +20,27 @@ def read(id=None):
     print(res_data)
 
 
+# read()
+# read(2)
+
+
 def insert():
-    pass
+    data = {
+        'name': 'Razz',
+        'roll': 25,
+        'city': 'NewYork'
+    }
+    json_data = json.dumps(data)
+    response = requests.post(url=URL, data=json_data)
+    res_data = response.json()
+    print(res_data)
 
 
-read(1)
+# insert()
+
+
+def update():
+    data = {}
+
+
+update()
