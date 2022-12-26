@@ -40,7 +40,34 @@ def insert():
 
 
 def update():
-    data = {}
+    def partial():
+        data = {
+            # passing partial update data
+            'id': 2,
+            'name': 'Harry',
+            'city': 'NewYork'
+        }
+        json_data = json.dumps(data)
+        response = requests.put(url=URL, data=json_data)
+        res_data = response.json()
+        print(res_data)
+
+    # partial()
+
+    def complete():
+        data = {
+            # passing complete update data
+            'id': 2,
+            'name': 'Razz',
+            'roll': 30,
+            'city': 'Pokhara'
+        }
+        json_data = json.dumps(data)
+        response = requests.patch(url=URL, data=json_data)
+        res_data = response.json()
+        print(res_data)
+
+    complete()
 
 
 update()
