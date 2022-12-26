@@ -1,7 +1,11 @@
 import requests
 import json
 
+# For Function based View
 URL = "http://127.0.0.1:8000/crud/"
+
+# For class Based View
+URL = "http://127.0.0.1:8000/class-crud/"
 
 # Function to read data if we pass id then get the specific data rather get list of data
 
@@ -21,14 +25,14 @@ def read(id=None):
 
 
 # read()
-# read(2)
+# read(3)
 
 
 def insert():
     data = {
-        'name': 'Razz',
-        'roll': 25,
-        'city': 'NewYork'
+        'name': 'Roman',
+        'roll': 31,
+        'city': 'Kathmandu'
     }
     json_data = json.dumps(data)
     response = requests.post(url=URL, data=json_data)
@@ -43,7 +47,7 @@ def update():
     def partial():
         data = {
             # passing partial update data
-            'id': 2,
+            'id': 3,
             'name': 'Harry',
             'city': 'NewYork'
         }
@@ -57,7 +61,7 @@ def update():
     def complete():
         data = {
             # passing complete update data
-            'id': 2,
+            'id': 3,
             'name': 'Razz',
             'roll': 30,
             'city': 'Pokhara'
@@ -72,9 +76,10 @@ def update():
 
 # update()
 
+
 def delete():
     data = {
-        'id': 1,
+        'id': 4,
     }
     json_data = json.dumps(data)
     response = requests.delete(url=URL, data=json_data)
