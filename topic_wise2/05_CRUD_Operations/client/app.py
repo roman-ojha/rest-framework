@@ -1,10 +1,12 @@
 import requests
 import json
 
+URL = "http://127.0.0.1:8000/crud/"
 
 # Function to read data if we pass id then get the specific data rather get list of data
+
+
 def read(id=None):
-    URL = ""
     data = {}
     if id is not None:
         data = {'id': id}
