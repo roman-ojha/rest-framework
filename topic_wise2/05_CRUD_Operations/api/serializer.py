@@ -22,3 +22,5 @@ class StudentSerializer(serializers.Serializer):
         instance.city = validated_data.get('city', instance.city)
         instance.save()
         return instance
+
+    # NOTE: for read & delete we don't need to create method

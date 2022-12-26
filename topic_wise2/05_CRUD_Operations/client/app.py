@@ -70,4 +70,16 @@ def update():
     complete()
 
 
-update()
+# update()
+
+def delete():
+    data = {
+        'id': 1,
+    }
+    json_data = json.dumps(data)
+    response = requests.delete(url=URL, data=json_data)
+    res_data = response.json()
+    print(res_data)
+
+
+delete()
