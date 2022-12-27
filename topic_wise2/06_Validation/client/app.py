@@ -24,14 +24,14 @@ def read(id=None):
     print(res_data)
 
 
-read()
+# read()
 # read(3)
 
 
 def insert():
     data = {
         'name': 'Roman',
-        'roll': 30,
+        'roll': 35,
         'city': 'Kathmandu'
     }
     json_data = json.dumps(data)
@@ -40,7 +40,7 @@ def insert():
     print(res_data)
 
 
-# insert()
+insert()
 
 
 def update():
