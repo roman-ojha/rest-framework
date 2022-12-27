@@ -4,6 +4,5 @@ from api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('crud/', views.student_api, name='crud'),
-    path('class-crud/', views.StudentAPI.as_view(), name='class-crud'),
+    path('crud/', views.StudentAPI.as_view(), name='crud'),
 ]
