@@ -5,7 +5,7 @@ import json
 URL = "http://127.0.0.1:8000/crud/"
 
 # For class Based View
-URL = "http://127.0.0.1:8000/class-crud/"
+# URL = "http://127.0.0.1:8000/class-crud/"
 
 # Function to read data if we pass id then get the specific data rather get list of data
 
@@ -24,14 +24,14 @@ def read(id=None):
     print(res_data)
 
 
-# read()
+read()
 # read(3)
 
 
 def insert():
     data = {
         'name': 'Roman',
-        'roll': 31,
+        'roll': 30,
         'city': 'Kathmandu'
     }
     json_data = json.dumps(data)
@@ -87,4 +87,4 @@ def delete():
     print(res_data)
 
 
-delete()
+# delete()

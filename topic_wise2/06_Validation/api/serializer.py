@@ -7,6 +7,18 @@ class StudentSerializer(serializers.Serializer):
     roll = serializers.IntegerField()
     city = serializers.CharField(max_length=100)
 
+    # Field level validation:
+    # syntax: def validate_<fieldname>(self)
+    def validate_roll(self, value):
+        print(value)
+        if value >= 200:
+            # you can now raise the validation error like this
+            raise serializers.ValidationError("Seat full")
+            # Now when user try to insert the value with roll greater then 200 equal to then it will raise the error
+        return value
+
+    # Object level validation
+
     def create(self, validated_data):
         return Student.objects.create(**validated_data)
 
