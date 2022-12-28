@@ -38,7 +38,7 @@ def insert():
     print(res_data)
 
 
-# insert()
+insert()
 
 
 def update():
@@ -72,7 +72,7 @@ def update():
     complete()
 
 
-update()
+# update()
 
 
 def delete():
