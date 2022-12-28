@@ -3,6 +3,40 @@ from .serializers import StudentSerializer
 from .models import Student
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
+
+# CRUD Operation Using GenericAPIView & Model Mixin:
+
+
+# This view will Response list of record from database
+# Implement GET Method
+class StudentList(GenericAPIView, ListModelMixin):
+    # For that we have to provide the queryset that it perform to response list of record
+    queryset = Student.objects.all()
+
+    # also we have to provide the serializer class for serializing the data
+    serializer_class = StudentSerializer
+
+    # ListModelMixin add implemented the list to get all the list of data so we will use that one
+    def get(self, request, *args, **kwargs):
+        # by returning list method now we can get all the list of data from 'Student' table
+        return self.list(request, *args, **kwargs)
+
+
+# This view will Create the 'Student' data and save into database
+# Implement POST Method
+class StudentCreate(GenericAPIView, CreateModelMixin):
+    # For that we have to provide the queryset that it perform to response list of record
+    queryset = Student.objects.all()
+
+    # also we have to provide the serializer class for serializing the data
+    serializer_class = StudentSerializer
+
+    # CreateModelMixin implement the post method that will create a new object and save into database
+    def post(self, request, *args, **kwargs):
+        # by returning list method now we can get all the list of data from 'Student' table
+        return self.create(request, *args, **kwargs)
 
 
 # Class Based APIView
