@@ -50,3 +50,24 @@ def student_api(request):
         students = Student.objects.all()
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
+    elif request.method == "POST":
+        data = request.data
+        serializer = StudentSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Data Created'})
+
+        return Response(serializer.errors)
+    elif request.method == "PUT":
+        id = request.data.get('id')
+        student = Student.objects.get(pk=id)
+        serializer = StudentSerializer(
+            student, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg": "Data Updated"})
+        return Response(serializer.errors)
+    elif request.method == "DELETE":
+        id = request.data.get('id')
+        student = Student.objects.get(id=id).delete()
+        return Response({'msg': "Data deleted"})

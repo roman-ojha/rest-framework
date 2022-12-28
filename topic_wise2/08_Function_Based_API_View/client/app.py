@@ -60,18 +60,21 @@ def read(id=None):
     print(res_data)
 
 
-read()
+# read()
 # read(13)
 
 
 def insert():
     data = {
-        'name': 'Roman',
-        'roll': 35,
+        'name': 'Jack',
+        'roll': 33,
         'city': 'Kathmandu'
     }
+    headers = {
+        "Content-Type": "application/json"
+    }
     json_data = json.dumps(data)
-    response = requests.post(url=URL, data=json_data)
+    response = requests.post(url=URL, data=json_data, headers=headers)
     res_data = response.json()
     print(res_data)
 
@@ -83,16 +86,19 @@ def update():
     def partial():
         data = {
             # passing partial update data
-            'id': 5,
+            'id': 14,
             'name': 'Harry',
             'city': 'NewYork'
         }
+        headers = {
+            "Content-Type": "application/json"
+        }
         json_data = json.dumps(data)
-        response = requests.put(url=URL, data=json_data)
+        response = requests.put(url=URL, data=json_data, headers=headers)
         res_data = response.json()
         print(res_data)
 
-    # partial()
+    partial()
 
     def complete():
         data = {
@@ -102,12 +108,15 @@ def update():
             'roll': 30,
             'city': 'Pokhara'
         }
+        headers = {
+            "Content-Type": "application/json"
+        }
         json_data = json.dumps(data)
         response = requests.patch(url=URL, data=json_data)
         res_data = response.json()
         print(res_data)
 
-    complete()
+    # complete()
 
 
 # update()
@@ -115,10 +124,13 @@ def update():
 
 def delete():
     data = {
-        'id': 5,
+        'id': 12,
+    }
+    headers = {
+        "Content-Type": "application/json"
     }
     json_data = json.dumps(data)
-    response = requests.delete(url=URL, data=json_data)
+    response = requests.delete(url=URL, data=json_data, headers=headers)
     res_data = response.json()
     print(res_data)
 
