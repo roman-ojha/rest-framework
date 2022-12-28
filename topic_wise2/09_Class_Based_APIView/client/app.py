@@ -1,45 +1,7 @@
 import requests
 import json
 
-
-def hello_world(url="http://127.0.0.1:8000/hw/"):
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    response = requests.get(url=url, headers=headers)
-    data = response.json()
-    print(data)
-
-
-# hello_world()
-
-
-def h_w_post(url="http://127.0.0.1:8000/hwp/"):
-    data = {
-        'name': 'Roman'
-    }
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    json_data = json.dumps(data)
-    response = requests.post(
-        url=url, data=json_data, headers=headers)
-    res_data = response.json()
-    print(res_data)
-
-
-# h_w_post()
-
-
-def h_w_gp():
-    hello_world("http://127.0.0.1:8000/hwgp/")
-    h_w_post("http://127.0.0.1:8000/hwgp/")
-
-
-# h_w_gp()
-
-
-# CRUD Operation For Function based View
+# CRUD Operation For Class based View
 URL = "http://127.0.0.1:8000/crud/"
 
 
@@ -94,7 +56,7 @@ def update():
             "Content-Type": "application/json"
         }
         json_data = json.dumps(data)
-        response = requests.put(url=URL, data=json_data, headers=headers)
+        response = requests.patch(url=URL, data=json_data, headers=headers)
         res_data = response.json()
         print(res_data)
 
@@ -112,7 +74,7 @@ def update():
             "Content-Type": "application/json"
         }
         json_data = json.dumps(data)
-        response = requests.patch(url=URL, data=json_data)
+        response = requests.put(url=URL, data=json_data, headers=headers)
         res_data = response.json()
         print(res_data)
 
