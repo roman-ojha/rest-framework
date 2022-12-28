@@ -36,28 +36,32 @@ def h_w_gp():
     h_w_post("http://127.0.0.1:8000/hwgp/")
 
 
-h_w_gp()
+# h_w_gp()
 
 
-# For Function based View
-# URL = "http://127.0.0.1:8000/crud/"
+# CRUD Operation For Function based View
+URL = "http://127.0.0.1:8000/crud/"
+
 
 def read(id=None):
     data = {}
     if id is not None:
         data = {'id': id}
 
-    # converting python dict into JSON
     json_data = json.dumps(data)
 
-    # requesting
-    response = requests.get(url=URL, data=json_data)
+    # we have to provide header
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(url=URL, data=json_data, headers=headers)
     res_data = response.json()
     print(res_data)
 
 
-# read()
-# read(5)
+read()
+# read(13)
 
 
 def insert():

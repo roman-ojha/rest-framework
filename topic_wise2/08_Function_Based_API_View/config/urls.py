@@ -7,4 +7,5 @@ urlpatterns = [
     path('hw/', views.hello_world, name='hw'),
     path('hwp/', views.h_w, name='hwp'),
     path('hwgp/', views.h_w_gp, name='hwgp'),
+    path('crud/', views.student_api, name='crud')
 ]
