@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import StudentSerializer
 from .models import Student
+from rest_framework import status
 
 # NOTE: if you use 'api_view' decorators in that case you will get Browsable API on you Browser
 
@@ -55,9 +56,8 @@ def student_api(request):
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'msg': 'Data Created'})
-
-        return Response(serializer.errors)
+            return Response({'msg': 'Data Created'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "PUT":
         id = request.data.get('id')
         student = Student.objects.get(pk=id)
@@ -66,8 +66,52 @@ def student_api(request):
         if serializer.is_valid():
             serializer.save()
             return Response({"msg": "Data Updated"})
-        return Response(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "DELETE":
         id = request.data.get('id')
+        student = Student.objects.get(id=id).delete()
+        return Response({'msg': "Data deleted"})
+
+
+# Now after implementing this view api function we can access the 'pk' value from url on Browsable API URL as well
+@api_view(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
+def student_api_2(request, pk=None):
+    # here we will get id from dynamic url rather then from 'request.data'
+    if request.method == 'GET':
+        id = pk
+        if id is not None:
+            student = Student.objects.get(id=id)
+            serializer = StudentSerializer(student)
+            return Response(serializer.data)
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        data = request.data
+        serializer = StudentSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Data Created'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PUT":
+        id = pk
+        student = Student.objects.get(pk=id)
+        serializer = StudentSerializer(
+            student, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg": "Data Updated"})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PATCH":
+        id = pk
+        student = Student.objects.get(pk=id)
+        serializer = StudentSerializer(
+            student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"msg": "Data Updated"})
+        return Response(serializer.errors)
+    elif request.method == "DELETE":
+        id = pk
         student = Student.objects.get(id=id).delete()
         return Response({'msg': "Data deleted"})
