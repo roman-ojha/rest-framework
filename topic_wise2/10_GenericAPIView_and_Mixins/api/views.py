@@ -74,7 +74,7 @@ class StudentDestroy(GenericAPIView, DestroyModelMixin):
 # On 'ListModelMixin' & 'CreateModelMixin' doesn't required 'pk'
 # On 'RetrieveModelMixin', 'UpdateModelMixin' & 'DestroyModelMixin' does required 'pk'
 # So these two are the Group so we will create different View class for this
-class StudentLC(GenericAPIView, ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
+class StudentLC(GenericAPIView, ListModelMixin, CreateModelMixin):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
@@ -86,7 +86,7 @@ class StudentLC(GenericAPIView, ListModelMixin, CreateModelMixin, RetrieveModelM
 
 
 # On 'RetrieveModelMixin', 'UpdateModelMixin' & 'DestroyModelMixin' does required 'pk'
-class StudentRUD(GenericAPIView, ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
+class StudentRUD(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
