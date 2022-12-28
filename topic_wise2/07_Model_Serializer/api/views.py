@@ -18,7 +18,7 @@ class StudentAPI(View):
         python_data = JSONParser().parse(stream)
         id = python_data.get('id', None)
         if id is not None:
-            student = Student.objects.get(id=id)
+            student = Student.objects.get(pk=id)
             serialized_data = StudentSerializer(student)
             json_data = JSONRenderer().render(serialized_data.data)
             return HttpResponse(json_data, content_type="application/json")

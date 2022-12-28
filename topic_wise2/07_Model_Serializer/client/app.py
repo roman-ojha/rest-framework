@@ -7,8 +7,6 @@ URL = "http://127.0.0.1:8000/crud/"
 # For class Based View
 # URL = "http://127.0.0.1:8000/class-crud/"
 
-# Function to read data if we pass id then get the specific data rather get list of data
-
 
 def read(id=None):
     data = {}
@@ -25,7 +23,7 @@ def read(id=None):
 
 
 # read()
-# read(3)
+# read(5)
 
 
 def insert():
@@ -40,14 +38,14 @@ def insert():
     print(res_data)
 
 
-insert()
+# insert()
 
 
 def update():
     def partial():
         data = {
             # passing partial update data
-            'id': 3,
+            'id': 5,
             'name': 'Harry',
             'city': 'NewYork'
         }
@@ -61,7 +59,7 @@ def update():
     def complete():
         data = {
             # passing complete update data
-            'id': 3,
+            'id': 6,
             'name': 'Razz',
             'roll': 30,
             'city': 'Pokhara'
@@ -74,12 +72,12 @@ def update():
     complete()
 
 
-# update()
+update()
 
 
 def delete():
     data = {
-        'id': 4,
+        'id': 5,
     }
     json_data = json.dumps(data)
     response = requests.delete(url=URL, data=json_data)
