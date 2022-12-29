@@ -1,0 +1,34 @@
+*) JWT default settings
+    => 'ACCESS_TOKEN_LIFETIME'
+        -> life of token, until it get verify
+        -> to access the api
+    => 'REFRESH_TOKEN_LIFETIME'
+        -> client also get the refresh token
+        -> to refresh the Access token
+    => 'ROTATE_REFRESH_TOKEN'
+        -> if (True) then: client got Access Token & Refresh Token
+        -> else: client go only Access Token 
+    => 'BLACKLIST_AFTER_ROTATION'
+    => 'ALGORITHM'
+        -> which algorithm you want JWT token to use
+    => 'SIGNING_KEY'
+        -> provide the secret key
+    => 'VERIFY_KEY'
+    => 'AUDIENCE'
+    => 'ISSUER'
+    => 'AUTH_HEADER_TYPES'
+
+*) Steps for authentication:
+    1. Client send 'username' & 'password' on ex: 'gettoken/' url
+    2. Server validate 'username' & 'password'
+        if validate: (response access token & refresh token)
+            response {'token':'xx','refresh':'xxx'}
+        -> ACCESS_TOKEN_LIFETIME: 5min
+        -> REFRESH_TOKEN_LIFETIME: 1days
+    3. Client save those token and after try to access the api using Access Token within 5min and get access
+    4. Client can also verify token is access token is validate or no on ex: 'verifytoken/' url
+    5. If ACCESS_TOKEN_LIFETIME exceed 5min in that case we will refresh that Access token because we have 1days of lifetime to refresh the Access token
+        -> client use ex: 'refreshtoken/' url to refresh token
+        -> now it will again get the new token
+        -> NOTE: client don't have to send 'username' & 'password' to get new token, they can use Refresh Token rather
+    6. Again client can access api
