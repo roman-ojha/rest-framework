@@ -25,6 +25,11 @@ Generate token through:
     -> signal is created inside './signals.py'
 """
 
+"""
+*) Token Authentication
+    -> we will use '../client/app.py' to request to the api with Authentication header
+"""
+
 
 # Get generated token:
 # Command: python manage.py drf_create_token <generated_user_token_username>
@@ -34,5 +39,6 @@ class StudentModelViewSet1(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
-    # authentication_classes = [SessionAuthentication]
-    # permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    # Using TokenAuthentication
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
