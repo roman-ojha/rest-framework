@@ -18,6 +18,6 @@ urlpatterns = [
     path('gettoken/', obtain_auth_token),
     path('gettoken/', obtain_auth_token),
 
-    # Using Custom class to object token
+    # Using Custom class to generate token
     path('gettoken2/', CustomAuthToken.as_view())
 ]
