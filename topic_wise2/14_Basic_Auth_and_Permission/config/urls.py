@@ -7,7 +7,8 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 # Register Router with 'ViewSet' class
-router.register('studentapi', views.StudentModelViewSet, basename='student')
+router.register('studentapi', views.StudentModelViewSet1, basename='student')
+router.register('studentapi2', views.StudentModelViewSet2, basename='student2')
 
 urlpatterns = [
     path('admin', admin.site.urls),
