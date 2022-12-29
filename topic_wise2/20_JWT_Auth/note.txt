@@ -1,4 +1,5 @@
 *) JWT default settings
+    -> https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
     => 'ACCESS_TOKEN_LIFETIME'
         -> life of token, until it get verify
         -> to access the api
