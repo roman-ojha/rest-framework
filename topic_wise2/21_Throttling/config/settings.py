@@ -88,3 +88,15 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Adding Rating on Throttle
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        # For anonymous user
+        'anon': '2/day',
+        # For authenticated user
+        'user': '5/hour',
+        # Custom Throttle class
+        'roman': '3/minute'
+    }
+}
