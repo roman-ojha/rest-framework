@@ -97,6 +97,13 @@ REST_FRAMEWORK = {
         # For authenticated user
         'user': '5/hour',
         # Custom Throttle class
-        'roman': '3/minute'
+        'roman': '3/minute',
+
+        # Defining rate for scoped throttle for specific api/view class
+        'listview': '6/minute',
+        'createview': '5/minute',
+        'retrieveview': '4/minute',
+        'updateview': '3/minute',
+        'destroyview': '2/minute',
     }
 }
