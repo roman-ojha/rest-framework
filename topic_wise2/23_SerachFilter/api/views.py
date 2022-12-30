@@ -1,46 +1,32 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
-from .serializsers import StudentSerializer
+from .serializers import StudentSerializer
 from .models import Student
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 
 # Create your views here.
 class StudentList(ListAPIView):
-    # queryset = Student.objects.all()
-
-    # if you want to filter by 'passby' field get the Student 'passby' xxx in that case we can change the query set like this:
-    # queryset = Student.objects.filter(passby='roman')
-    # But we will set the query set as 'all()'
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
-    # and we will filter the queryset with those user that get logged in
-    # so if 'roman' user is authenticated and try to call this api in that case we want to filter the student 'passby' 'roman' user
-    # for that we have to override the 'get_queryset' method
-    def get_queryset(self):
-        user = self.request.user
-        print(user)
-        return Student.objects.filter(passby=user)
+    # adding SearchFilter class for filter_backends
+    filter_backends = [SearchFilter]
+    # we have to specify the field on the basis you want to search
+    # search_fields = ['city']
+    # EX: http://127.0.0.1:8000/list/?search=pokhara
 
+    # search_fields = ['name','city']
 
-class StudentListDF(ListAPIView):
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
-    """
-        -> But to filter base of field we will use 'django-filter' package:
-        -> pip install django-filter
-        -> add app on INSTALLED_APPS on 'settings.py' file
-        -> we can globally enable django_filter on 'settings.py' file
-                REST_FRAMEWORK = {
-                    'DEFAULT_FILTER_BACKENDS': ['django_filter.rest_framework.DjangoFilterBackend']
-                }
-            
-    """
-    # now here we will specify the fields from which we want to filter
-    # filterset_fields = ['city']
-    # EX: http://127.0.0.1:8000/listdf/?city=pokhara
+    # start with:
+    # search_fields = ['^name']
 
-    # But if you don't want to use 'django-filter' globally in that case you can specify the filter_backends for every view class
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['city', 'passby']
+    # Exact match
+    search_fields = ['=name']
+
+    # by default DRF provide 'search' as query parameter and if you want to change it
+    # in that case you want to add this inside 'settings.py' file
+    # REST_FRAMEWORK = {
+    #     'SEARCH_PARAM': 'q'
+    # }
+    # EX: http://127.0.0.1:8000/list/?q=Tony
