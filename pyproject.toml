@@ -16,6 +16,7 @@ autopep8 = "^1.6.0"
 algoliasearch-django = "2.0"
 python-decouple = "^3.6"
 djangorestframework-simplejwt = "^5.2.2"
+django-filter = "^22.1"
 
 [tool.poetry.dev-dependencies]
 
