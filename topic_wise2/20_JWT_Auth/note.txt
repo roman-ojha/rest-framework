@@ -33,3 +33,5 @@
         -> now it will again get the new token
         -> NOTE: client don't have to send 'username' & 'password' to get new token, they can use Refresh Token rather
     6. Again client can access api
+    
+=> Used files are './api/views.py' ,'./config/urls.py', './api/admin.py', './api/models.py', './api/serializer.py' & './client/app.py'
