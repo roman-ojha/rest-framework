@@ -1,7 +1,7 @@
 from rest_framework.pagination import LimitOffsetPagination
 
 
-# Implementing Custom pagination using 'PageNumberPagination'
+# Implementing Custom pagination using 'LimitOffsetPagination'
 class MyLimitOffsetPagination(LimitOffsetPagination):
 
     # You can specify the limit:

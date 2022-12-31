@@ -1,25 +1,13 @@
-from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.pagination import CursorPagination
 
 
-# Implementing Custom pagination using 'PageNumberPagination'
-class MyLimitOffsetPagination(LimitOffsetPagination):
+# Implementing Custom pagination using 'CursorPagination'
+class MyCursorPagination(CursorPagination):
+    page_size = 5
 
-    # You can specify the limit:
-    # http: // 127.0.0.1: 8000/list /?limit = 4
-    # limit means page size
+    # if you added 'created' field inside model in that case it could have pagination using 'created' filed
+    # but we have not specify that field we have to specify the different field here
+    ordering = 'name'
 
-    # You can also specify the offset value
-    # http://127.0.0.1:8000/list/?limit=4&offset=3
-    # offset means to show us record from the given offset
-
-    # you can also define the default limit
-    default_limit = 5
-
-    # if you want to override the 'limit' query params
-    limit_query_param = 'size'
-
-    # if you want to override the 'offset' query params
-    offset_query_param = 'from'
-
-    # define max limit
-    max_limit = 6
+    # if you want to override the cursor parameter in that case you can specify this
+    cursor_query_param = 'cu'
