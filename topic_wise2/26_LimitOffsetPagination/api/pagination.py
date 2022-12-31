@@ -1,23 +1,25 @@
-from rest_framework.pagination import PageNumberPagination
+from rest_framework.pagination import LimitOffsetPagination
 
 
 # Implementing Custom pagination using 'PageNumberPagination'
-class MyPageNumberPagination(PageNumberPagination):
-    page_size = 4
+class MyLimitOffsetPagination(LimitOffsetPagination):
 
-    # http://127.0.0.1:8000/list/?page=2
-    # by default the query parameter for PageNumberPagination is 'page' if you want to change it then you can override it
-    page_query_param = 'pg'
-    # http://127.0.0.1:8000/list/?pg=2
+    # You can specify the limit:
+    # http: // 127.0.0.1: 8000/list /?limit = 4
+    # limit means page size
 
-    # if you want client to define the page size in that case you override this property
-    page_size_query_param = 'records'
-    # http://127.0.0.1:8000/list/?pg=2&records=3
+    # You can also specify the offset value
+    # http://127.0.0.1:8000/list/?limit=4&offset=3
+    # offset means to show us record from the given offset
 
-    # you can also define the max page size that client can specify
-    max_page_size = 5
+    # you can also define the default limit
+    default_limit = 5
 
-    # if you will go to http://127.0.0.1:8000/list/?pg=last
-    # then it will reach to the last page if you want to override the 'last' string in then:
-    last_page_strings = 'end'
-    # http://127.0.0.1:8000/list/?pg=end
+    # if you want to override the 'limit' query params
+    limit_query_param = 'size'
+
+    # if you want to override the 'offset' query params
+    offset_query_param = 'from'
+
+    # define max limit
+    max_limit = 6
