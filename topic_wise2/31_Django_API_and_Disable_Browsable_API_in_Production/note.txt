@@ -1,0 +1,7 @@
+=> Here we will create the django project without DRF and then add API in it using DRF on all of those routes
+
+=> Todo Before project:
+    -> https://www.youtube.com/watch?v=OPc_oMgjhpM&list=PLbGui_ZYuhigchy8DTw4pX4duTTpvqlh6&index=68
+    -> https://www.youtube.com/watch?v=XQjaTUwTJRY&list=PLbGui_ZYuhigchy8DTw4pX4duTTpvqlh6&index=111
+
+=> Used files are 
