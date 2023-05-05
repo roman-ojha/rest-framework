@@ -1,3 +1,11 @@
-=> Here we will create the django project without DRF and then add API in it using DRF on all of those routes
+=> Here we will use the django project without DRF and then add API in it using DRF on all of those routes
+=> now we will create './enroll/api' folder so that we can create api for this app
+=> because we already have created 'models' we don't have to create it again
+=> so we will just going to create a serializers, urls & view for api
+=> So if we want Authentication for api and other feature that we learned before specifically for api that we will put all of those inside 'api' folder
 
-=> Used files are 
+*) Disable Browsable API in production:
+    -> Add this in 'settings.py':
+        REST_FRAMEWORK = {
+            'DEFAULT_RENDERER_CLASSES':('rest_framework.renderers.JSONRenderer',)
+        }

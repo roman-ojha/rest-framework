@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["makemigrations", "Queryset"]
+  "cSpell.words": ["makemigrations", "Queryset"],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "none"
 }
