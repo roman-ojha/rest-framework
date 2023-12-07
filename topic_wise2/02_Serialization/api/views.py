@@ -26,6 +26,8 @@ def student_detail(request, pk):
 
 def student_list(request):
     students = Student.objects.all()
+    # If we are serializing model then we just have to pass the model instance
+    # But if we are serializing the incoming data then we have to serialize like this: StudentSerializer(data=request.data)
     serialized = StudentSerializer(students, many=True)
 
     # if you don't want to render into json rather you want to render into json and then return using one method then you can use JsonResponse
